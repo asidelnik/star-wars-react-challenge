@@ -4,7 +4,6 @@ import VehiclesTable from './components/vehicles-table/vehicles-table';
 function App() {
   return (
       <VehiclesTable />
-    // </div>
   );
 }
 

@@ -1,16 +1,10 @@
-import { getDefaultNormalizer, logDOM } from "@testing-library/react";
 import { useEffect, useState } from "react";
-// import data from './styles.css'; 
+// import data from './styles.css';
 
 const axios = require("axios");
 
 function getWithUrlRoot(urlRoot) {
-  // axios.get('https://swapi.py4e.com/api/planets/3/')
   return axios.get("https://swapi.py4e.com/api/" + urlRoot);
-}
-
-function getWithFullUrl(urlFull) {
-  return axios.get(urlFull);
 }
 
 async function getWithFullUrlAsync(urlFull) {
@@ -126,44 +120,40 @@ const VehiclesTable = (props) => {
       <tbody>
         <tr>
           <td>
-            Vehicle name with the largest population sum
-            <span>{res && res.vehicleName}</span>
+            Vehicle name with the largest population sum:
+            <span> {res && res.vehicleName}</span>
           </td>
         </tr>
         <tr>
           <td>
             Related home planets and their respective population
-            {res &&
-              res.pilots.map((pilot) => {
-                const { homeworldName, homeworldPopulation } = pilot;
-                return (
-                  <ul>
-                    {
-                      <li key={homeworldName}>
-                        {homeworldName} - {homeworldPopulation}
-                      </li>
-                    }
-                  </ul>
-                );
-              })}
+            <ul>
+              {res &&
+                res.pilots.map((pilot) => {
+                  const { homeworldName, homeworldPopulation } = pilot;
+                  return (
+                    <li key={homeworldName}>
+                      {homeworldName} - {homeworldPopulation}
+                    </li>
+                  );
+                })}
+            </ul>
           </td>
         </tr>
         <tr>
           <td>
             Related pilot names
-            {res &&
-              res.pilots.map((pilot) => {
-                const { pilotName } = pilot;
-                return (
-                  <ul>
-                    {
-                      <li key={pilotName}>
+            <ul>
+              {res &&
+                res.pilots.map((pilot) => {
+                  const { pilotName } = pilot;
+                  return (
+                    <li key={pilotName}>
                         <span>{pilotName}</span>
                       </li>
-                    }
-                  </ul>
-                );
-              })}
+                  );
+                })}
+            </ul>
           </td>
         </tr>
       </tbody>
@@ -171,3 +161,7 @@ const VehiclesTable = (props) => {
   );
 };
 export default VehiclesTable;
+
+// function getWithFullUrl(urlFull) {
+//   return axios.get(urlFull);
+// }

@@ -30,15 +30,69 @@ function getData() {
 }
 
 const PlanetsPopulationBarChart = (props) => {
-  let [res, setRes] = useState();
+    let [res, setRes] = useState();
+  
+    useEffect(() => {
+      getData().then(function (data) {
+        console.log(data);
+        setRes(data);
+      });
+    }, []);
+    return <BarChart data={res} />
+  };
 
-  useEffect(() => {
-    getData().then(function (data) {
-      console.log(data);
-      setRes(data);
-    });
-  }, []);
-  return <span>x</span>;
+const Chart = ({ children, width, height }) => (
+  <svg viewBox={`0 0 ${width} ${height}`} width={width} height={height}>
+    {children}
+  </svg>
+);
+
+const Bar = ({ x, y, width, height }) => (
+  <rect x={x} y={y} width={width} height={height} fill={"#0ac"} />
+);
+
+const BarChart = ({ data }) => {
+  //   // Width of each bar
+  //   const itemWidth = 20;
+
+  //   // Distance between each bar
+  //   const itemMargin = 5;
+
+  //   const dataLength = data.length;
+
+  //   // Normalize data, we'll reduce all sizes to 25% of their original value
+  //   const massagedData = data.map((datum) =>
+  //     Object.assign({}, datum, { repos: datum.repos * 0.25 })
+  //   );
+
+  //   const mostRepos = massagedData.reduce((acc, cur) => {
+  //     const { repos } = cur;
+  //     return repos > acc ? repos : acc;
+  //   }, 0);
+
+  //   const chartHeight = mostRepos;
+
+  return <span>{data && data[0].name}</span>;
+  //   return (
+  //     <Chart
+  //       width={dataLength * (itemWidth + itemMargin)}
+  //       height={chartHeight}
+  //     >
+  //       {massagedData.map((datum, index) => {
+  //         const itemHeight = datum.repos;
+
+  //         return (
+  //           <Bar
+  //             key={datum.name}
+  //             x={index * (itemWidth + itemMargin)}
+  //             y={chartHeight - itemHeight}
+  //             width={itemWidth}
+  //             height={itemHeight}
+  //           />
+  //         );
+  //       })}
+  //     </Chart>
+  //   );
 };
 
 export default PlanetsPopulationBarChart;

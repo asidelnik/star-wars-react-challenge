@@ -121,7 +121,7 @@ const VehiclesTable = (props) => {
         <tr>
           <td>
             Vehicle name with the largest population sum:
-            <span class="bold"> {res && res.vehicleName}</span>
+            <span className="bold"> {res && res.vehicleName}</span>
           </td>
         </tr>
         <tr>

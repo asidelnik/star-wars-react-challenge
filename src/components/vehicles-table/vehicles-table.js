@@ -161,7 +161,3 @@ const VehiclesTable = (props) => {
   );
 };
 export default VehiclesTable;
-
-// function getWithFullUrl(urlFull) {
-//   return axios.get(urlFull);
-// }

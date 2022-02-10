@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-// import data from './styles.css';
+import bold from './styles.css';
 
 const axios = require("axios");
 
@@ -121,7 +121,7 @@ const VehiclesTable = (props) => {
         <tr>
           <td>
             Vehicle name with the largest population sum:
-            <span> {res && res.vehicleName}</span>
+            <span class="bold"> {res && res.vehicleName}</span>
           </td>
         </tr>
         <tr>
@@ -133,7 +133,7 @@ const VehiclesTable = (props) => {
                   const { homeworldName, homeworldPopulation } = pilot;
                   return (
                     <li key={homeworldName}>
-                      {homeworldName} - {homeworldPopulation}
+                      <span className="bold">{homeworldName} - {homeworldPopulation}</span>
                     </li>
                   );
                 })}
@@ -149,7 +149,7 @@ const VehiclesTable = (props) => {
                   const { pilotName } = pilot;
                   return (
                     <li key={pilotName}>
-                        <span>{pilotName}</span>
+                        <span className="bold">{pilotName}</span>
                       </li>
                   );
                 })}

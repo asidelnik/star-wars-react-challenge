@@ -14,28 +14,28 @@ async function getWithFullUrlAsync(urlFull) {
 function getData() {
   return getWithUrlRoot("vehicles")
     .then(function (vehicles) {
-      console.log("vehicles", vehicles.data.results);
+      // console.log("vehicles", vehicles.data.results);
       let vehiclesWhichHavePilots = vehicles.data.results.filter(
         (v) => v.pilots.length > 0
       );
-      console.log("vehiclesWithPilots", vehiclesWhichHavePilots);
+      // console.log("vehiclesWithPilots", vehiclesWhichHavePilots);
       let vehicleAndPilotsUrls = vehiclesWhichHavePilots.map(
         ({ pilots, url, name }) => ({ pilots, url, name })
       );
       return vehicleAndPilotsUrls;
     })
     .then(function (vehicleAndPilotsUrls) {
-      console.log("vehicleAndPilotsUrl", vehicleAndPilotsUrls);
+      // console.log("vehicleAndPilotsUrl", vehicleAndPilotsUrls);
       let vehiclesAndPilots = vehicleAndPilotsUrls.map(async (vehicle) => {
         let promisesInner = vehicle.pilots.map((p) => getWithFullUrlAsync(p));
         vehicle.pilots = await Promise.allSettled(promisesInner);
         return vehicle;
       });
-      console.log(vehiclesAndPilots);
+      // console.log(vehiclesAndPilots);
       return Promise.allSettled(vehiclesAndPilots);
     })
     .then(function (vehiclesAndPilots_AllKeys) {
-      console.log("response", vehiclesAndPilots_AllKeys);
+      // console.log("response", vehiclesAndPilots_AllKeys);
       let vehicleAndPilots_SpecificKeys = [];
       for (let vehicle of vehiclesAndPilots_AllKeys) {
         vehicleAndPilots_SpecificKeys.push({
@@ -46,11 +46,11 @@ function getData() {
             .map(({ name, homeworld }) => ({ name, homeworld })),
         });
       }
-      console.log("response", vehicleAndPilots_SpecificKeys);
+      // console.log("response", vehicleAndPilots_SpecificKeys);
       return vehicleAndPilots_SpecificKeys;
     })
     .then(function (vehicleAndPilots_SpecificKeys) {
-      console.log("response", vehicleAndPilots_SpecificKeys);
+      // console.log("response", vehicleAndPilots_SpecificKeys);
       let vehiclesPilotsWorlds = vehicleAndPilots_SpecificKeys.map(
         async (vehicle) => {
           for (let pilot of vehicle.pilots) {
@@ -59,11 +59,11 @@ function getData() {
           return vehicle;
         }
       );
-      console.log("response", vehiclesPilotsWorlds);
+      // console.log("response", vehiclesPilotsWorlds);
       return Promise.allSettled(vehiclesPilotsWorlds);
     })
     .then(function (vehiclesPilotsWorlds) {
-      console.log("homeworlds", vehiclesPilotsWorlds);
+      // console.log("homeworlds", vehiclesPilotsWorlds);
       let vehiclesPilotsWorlds_SpecificKeys = [];
       for (let vehicle of vehiclesPilotsWorlds) {
         vehiclesPilotsWorlds_SpecificKeys.push({
@@ -96,7 +96,7 @@ function getData() {
       );
       let vehicleWithLargestPopulationSum =
         vehiclesPilotsWorlds_SpecificKeys[0];
-      console.log("response", vehicleWithLargestPopulationSum);
+      // console.log("response", vehicleWithLargestPopulationSum);
       return vehicleWithLargestPopulationSum;
     })
     .catch(function (error) {
@@ -110,7 +110,7 @@ const VehiclesTable = (props) => {
 
   useEffect(() => {
     getData().then(function (data) {
-      console.log(data);
+      // console.log(data);
       setRes(data);
     });
   }, []);

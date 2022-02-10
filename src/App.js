@@ -5,7 +5,7 @@ import VehiclesTable from "./components/vehicles-table/vehicles-table";
 function App() {
   return (
     <>
-    <h2>Star Wars Challenge - React</h2>
+    <h2>Star Wars React Challenge</h2>
       <div className="exercise">
         <VehiclesTable />
       </div>

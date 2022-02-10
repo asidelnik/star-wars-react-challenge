@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+h2 {
+  padding-left: 15px;
+  color: #01aed1;
+}
+.exercise {
+  padding: 15px;
+}
